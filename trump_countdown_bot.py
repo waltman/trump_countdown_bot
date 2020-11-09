@@ -18,8 +18,7 @@ def decode_duration(secs):
 
     return days, hrs, mins, secs
 
-def countdown():
-    inaug_epoch = int(time.mktime(time.strptime("2021-01-20 12:00", "%Y-%m-%d %H:%M")))
+def countdown(inaug_epoch):
     delta_secs = int(inaug_epoch - time.time())
 
     days, hrs, mins, secs = decode_duration(delta_secs)
@@ -33,6 +32,7 @@ def countdown():
 
 dotenv = load_dotenv()
 TOKEN = dotenv['DISCORD_TOKEN']
+inaug_epoch = int(time.mktime(time.strptime("2021-01-20 12:00", "%Y-%m-%d %H:%M")))
 
 client = discord.Client()
 
@@ -43,7 +43,7 @@ async def on_message(message):
         return
 
     if message.content == 'countdown':
-        msg = countdown()
+        msg = countdown(inaug_epoch)
         print(f'Message from {message.author}, countdown={msg}')
         await message.channel.send(msg)
 
