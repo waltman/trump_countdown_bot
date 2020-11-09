@@ -48,7 +48,8 @@ async def on_message(message):
 
     if message.content == 'countdown':
         msg = countdown()
-        await client.send_message(message.channel, msg)
+        print(f'Message from {message.author}, countdown={msg}')
+        await message.channel.send(msg)
 
 @client.event
 async def on_ready():
