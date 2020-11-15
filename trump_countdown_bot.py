@@ -30,6 +30,9 @@ def countdown(inaug_epoch):
 
     return f'{days} {day_s}, {hrs} {hr_s}, {mins} {min_s}, and {secs} {sec_s}.'
 
+def swatch():
+    return f'@{((int(time.time()) + 3600) % 86400) // 86.4 :03.0f}'
+
 dotenv = load_dotenv()
 TOKEN = dotenv['DISCORD_TOKEN']
 inaug_epoch = int(time.mktime(time.strptime("2021-01-20 12:00", "%Y-%m-%d %H:%M")))
@@ -45,6 +48,10 @@ async def on_message(message):
     if message.content == 'countdown':
         msg = countdown(inaug_epoch)
         print(f'Message from {message.author}, countdown={msg}')
+        await message.channel.send(msg)
+    elif message.content == 'swatch':
+        msg = swatch()
+        print(f'Message from {message.author}, swatch={msg}')
         await message.channel.send(msg)
 
 @client.event
