@@ -1,5 +1,6 @@
 import discord
 import time
+from chomsky import chomsky
 
 def load_dotenv():
     dotenv = dict()
@@ -52,6 +53,10 @@ async def on_message(message):
     elif message.content == 'swatch':
         msg = swatch()
         print(f'Message from {message.author}, swatch={msg}')
+        await message.channel.send(msg)
+    elif message.content == 'chomsky':
+        msg = chomsky()
+        print(f'Message from {message.author}, chomsky={msg}')
         await message.channel.send(msg)
 
 @client.event
