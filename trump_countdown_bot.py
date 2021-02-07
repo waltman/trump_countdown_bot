@@ -19,8 +19,10 @@ def decode_duration(secs):
 
     return days, hrs, mins, secs
 
-def countdown(inaug_epoch):
+def countdown(inaug_epoch, inaug_epoch2):
     delta_secs = int(inaug_epoch - time.time())
+    if delta_secs < 0:
+        delta_secs = int(inaug_epoch2 - time.time())
 
     days, hrs, mins, secs = decode_duration(delta_secs)
 
@@ -37,6 +39,7 @@ def swatch():
 dotenv = load_dotenv()
 TOKEN = dotenv['DISCORD_TOKEN']
 inaug_epoch = int(time.mktime(time.strptime("2021-01-20 12:00", "%Y-%m-%d %H:%M")))
+inaug_epoch_2025 = int(time.mktime(time.strptime("2025-01-20 12:00", "%Y-%m-%d %H:%M")))
 
 client = discord.Client()
 
@@ -47,7 +50,7 @@ async def on_message(message):
         return
 
     if message.content == 'countdown':
-        msg = countdown(inaug_epoch)
+        msg = countdown(inaug_epoch, inaug_epoch_2025)
         print(f'Message from {message.author}, countdown={msg}')
         await message.channel.send(msg)
     elif message.content == 'swatch':
