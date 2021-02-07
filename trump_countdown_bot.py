@@ -38,7 +38,8 @@ def swatch():
     return f'@{((int(time.time()) + 3600) % 86400) // 86.4 :03.0f}'
 
 def conspiracy():
-    return os.popen('/home/waltman/bin/conspiracy_theory').read()
+    with os.popen('/home/waltman/bin/conspiracy_theory') as f:
+        return f.read()
 
 dotenv = load_dotenv()
 TOKEN = dotenv['DISCORD_TOKEN']
