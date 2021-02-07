@@ -1,4 +1,5 @@
 import discord
+import os
 import time
 from chomsky import chomsky
 
@@ -36,6 +37,9 @@ def countdown(inaug_epoch, inaug_epoch2):
 def swatch():
     return f'@{((int(time.time()) + 3600) % 86400) // 86.4 :03.0f}'
 
+def conspiracy():
+    return os.popen('/home/waltman/bin/conspiracy_theory').read()
+
 dotenv = load_dotenv()
 TOKEN = dotenv['DISCORD_TOKEN']
 inaug_epoch = int(time.mktime(time.strptime("2021-01-20 12:00", "%Y-%m-%d %H:%M")))
@@ -60,6 +64,10 @@ async def on_message(message):
     elif message.content == 'chomsky':
         msg = chomsky()
         print(f'Message from {message.author}, chomsky={msg}')
+        await message.channel.send(msg)
+    elif message.content == 'conspiracy':
+        msg = conspiracy()
+        print(f'Message from {message.author}, conspiracy={msg}')
         await message.channel.send(msg)
 
 @client.event
