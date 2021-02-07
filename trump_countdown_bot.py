@@ -54,19 +54,20 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content == 'countdown':
+    content = message.content.lower()
+    if content == 'countdown':
         msg = countdown(inaug_epoch, inaug_epoch_2025)
         print(f'Message from {message.author}, countdown={msg}')
         await message.channel.send(msg)
-    elif message.content == 'swatch':
+    elif content == 'swatch':
         msg = swatch()
         print(f'Message from {message.author}, swatch={msg}')
         await message.channel.send(msg)
-    elif message.content == 'chomsky':
+    elif content == 'chomsky':
         msg = chomsky()
         print(f'Message from {message.author}, chomsky={msg}')
         await message.channel.send(msg)
-    elif message.content == 'conspiracy':
+    elif content == 'conspiracy':
         msg = conspiracy()
         print(f'Message from {message.author}, conspiracy={msg}')
         await message.channel.send(msg)
