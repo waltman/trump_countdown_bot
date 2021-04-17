@@ -20,10 +20,13 @@ def decode_duration(secs):
 
     return days, hrs, mins, secs
 
-def countdown(inaug_epoch, inaug_epoch2):
+def countdown(inaug_epoch):
     delta_secs = int(inaug_epoch - time.time())
     if delta_secs < 0:
-        delta_secs = int(inaug_epoch2 - time.time())
+        sign = -1
+        delta_secs = -delta_secs
+    else:
+        sign = 1
 
     days, hrs, mins, secs = decode_duration(delta_secs)
 
@@ -32,7 +35,7 @@ def countdown(inaug_epoch, inaug_epoch2):
     min_s = "minute" if mins == 1 else "minutes"
     sec_s = "second" if secs == 1 else "seconds"
 
-    return f'{days} {day_s}, {hrs} {hr_s}, {mins} {min_s}, and {secs} {sec_s}.'
+    return f'{sign * days} {day_s}, {hrs} {hr_s}, {mins} {min_s}, and {secs} {sec_s}.'
 
 def swatch():
     return f'@{((int(time.time()) + 3600) % 86400) // 86.4 :03.0f}'
@@ -56,7 +59,7 @@ async def on_message(message):
 
     content = message.content.lower()
     if content == 'countdown':
-        msg = countdown(inaug_epoch, inaug_epoch_2025)
+        msg = countdown(inaug_epoch_2025)
         print(f'Message from {message.author}, countdown={msg}')
         await message.channel.send(msg)
     elif content == 'swatch':
