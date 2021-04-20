@@ -50,9 +50,9 @@ inaug_epoch = int(time.mktime(time.strptime("2021-01-20 12:00", "%Y-%m-%d %H:%M"
 inaug_epoch_2025 = int(time.mktime(time.strptime("2025-01-20 12:00", "%Y-%m-%d %H:%M")))
 
 vaccine_jab1 = int(time.mktime(time.strptime("2021-04-15 13:30", "%Y-%m-%d %H:%M")))
-vaccine_jab1_week = int(time.mktime(time.strptime("2021-04-22 13:30", "%Y-%m-%d %H:%M")))
+vaccine_jab1_week = int(time.mktime(time.strptime("2021-04-29 13:30", "%Y-%m-%d %H:%M")))
 vaccine_jab2 = int(time.mktime(time.strptime("2021-05-06 13:30", "%Y-%m-%d %H:%M")))
-vaccine_jab2_week = int(time.mktime(time.strptime("2021-05-13 13:30", "%Y-%m-%d %H:%M")))
+vaccine_jab2_week = int(time.mktime(time.strptime("2021-05-20 13:30", "%Y-%m-%d %H:%M")))
 
 client = discord.Client()
 
@@ -84,7 +84,7 @@ async def on_message(message):
         m2 = countdown(vaccine_jab1_week)
         m3 = countdown(vaccine_jab2)
         m4 = countdown(vaccine_jab2_week)
-        msg = f'First jab: {m1}\n7 days after first jab: {m2}\nSecond jab: {m3}\n7 days after second jab: {m4}'
+        msg = f'First jab: {m1}\n14 days after first jab: {m2}\nSecond jab: {m3}\n14 days after second jab: {m4}'
         print(f'Message from {message.author}, walt vaccine={msg}')
         await message.channel.send(msg)
 
