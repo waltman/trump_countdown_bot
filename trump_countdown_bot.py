@@ -84,7 +84,7 @@ async def on_message(message):
         m2 = countdown(vaccine_jab1_week)
         m3 = countdown(vaccine_jab2)
         m4 = countdown(vaccine_jab2_week)
-        msg = f'First jab: {m1}\n14 days after first jab: {m2}\nSecond jab: {m3}\n14 days after second jab: {m4}'
+        msg = f'**First jab:** {m1}\n**14 days after first jab:** {m2}\n**Second jab:** {m3}\n**14 days after second jab:** {m4}'
         print(f'Message from {message.author}, walt vaccine={msg}')
         await message.channel.send(msg)
 
