@@ -23,10 +23,10 @@ def decode_duration(secs):
 def countdown(inaug_epoch):
     delta_secs = int(inaug_epoch - time.time())
     if delta_secs < 0:
-        sign = -1
+        sign = "-"
         delta_secs = -delta_secs
     else:
-        sign = 1
+        sign = ""
 
     days, hrs, mins, secs = decode_duration(delta_secs)
 
@@ -35,7 +35,7 @@ def countdown(inaug_epoch):
     min_s = "minute" if mins == 1 else "minutes"
     sec_s = "second" if secs == 1 else "seconds"
 
-    return f'{sign * days} {day_s}, {hrs} {hr_s}, {mins} {min_s}, and {secs} {sec_s}.'
+    return f'{sign}{days} {day_s}, {hrs} {hr_s}, {mins} {min_s}, and {secs} {sec_s}.'
 
 def swatch():
     return f'@{((int(time.time()) + 3600) % 86400) // 86.4 :03.0f}'
