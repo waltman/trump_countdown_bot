@@ -53,7 +53,7 @@ vaccine_jab1 = int(time.mktime(time.strptime("2021-04-15 13:30", "%Y-%m-%d %H:%M
 vaccine_jab1_week = int(time.mktime(time.strptime("2021-04-29 13:30", "%Y-%m-%d %H:%M")))
 vaccine_jab2 = int(time.mktime(time.strptime("2021-05-06 13:30", "%Y-%m-%d %H:%M")))
 vaccine_jab2_week = int(time.mktime(time.strptime("2021-05-20 13:30", "%Y-%m-%d %H:%M")))
-vaccine_jab3 = int(time.mktime(time.strptime("2022-01-06 13:30", "%Y-%m-%d %H:%M")))
+vaccine_jab3 = int(time.mktime(time.strptime("2021-11-06 13:30", "%Y-%m-%d %H:%M")))
 
 client = discord.Client()
 
@@ -86,7 +86,7 @@ async def on_message(message):
         m3 = countdown(vaccine_jab2)
         m4 = countdown(vaccine_jab2_week)
         m5 = countdown(vaccine_jab3)
-        msg = f'**First jab:** {m1}\n**14 days after first jab:** {m2}\n**Second jab:** {m3}\n**14 days after second jab:** {m4}\n**8 months after second jab:** {m5}'
+        msg = f'**First jab:** {m1}\n**14 days after first jab:** {m2}\n**Second jab:** {m3}\n**14 days after second jab:** {m4}\n**6 months after second jab:** {m5}'
         print(f'Message from {message.author}, walt vaccine={msg}')
         await message.channel.send(msg)
 
