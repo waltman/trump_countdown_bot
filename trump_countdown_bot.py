@@ -96,7 +96,7 @@ async def on_message(message):
         await message.channel.send(msg)
     elif content.startswith('covid pa graph'):
         county = content.split()[-1].title()
-        fname = os.path.join('/home/waltman/perl/projects/covid19', county + "_cases.png")
+        fname = os.path.join('/home/waltman/perl/projects/covid19/graphs', county + "_cases.png")
         if os.path.exists(fname):
             print(f'Message from {message.author}, sending {fname}')
             await message.channel.send(file=discord.File(fname))
