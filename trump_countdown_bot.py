@@ -94,6 +94,16 @@ async def on_message(message):
         msg = f'**First jab:** {m1}\n**14 days after first jab:** {m2}\n**Second jab:** {m3}\n**14 days after second jab:** {m4}\n**Third jab:** {m5}'
         print(f'Message from {message.author}, walt vaccine={msg}')
         await message.channel.send(msg)
+    elif content.startswith('covid pa graph'):
+        county = content.split()[-1].title()
+        fname = os.path.join('/home/waltman/perl/projects/covid19', county + "_cases.png")
+        if os.path.exists(fname):
+            print(f'Message from {message.author}, sending {fname}')
+            await message.channel.send(file=discord.File(fname))
+        else:
+            msg = f'Sorry, no graph for {county}'
+            print(f"Message from {message.author}, {fname} doesn't exist")
+            await message.channel.send(msg)
 
 @client.event
 async def on_ready():
