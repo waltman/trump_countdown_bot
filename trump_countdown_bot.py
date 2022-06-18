@@ -3,6 +3,33 @@ import os
 import time
 from chomsky import chomsky
 from well_actually import well_actually
+import calendar
+import datetime
+
+def days_to_ymd(days):
+    days_in_month = [
+        [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+        [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+    ]
+    now = datetime.datetime.fromtimestamp(time.time())
+    year = now.year
+    month = now.month-1
+    years = 0
+    months = 0
+    while (True):
+        dim = days_in_month[1][month] if calendar.isleap(year) else days_in_month[0][month]
+        if dim > days:
+            return years, months, days
+        else:
+            days -= dim
+            months += 1
+            if months == 12:
+                months = 0
+                years += 1
+            month -= 1
+            if month < 0:
+                month = 11
+                year -= 1
 
 def load_dotenv():
     dotenv = dict()
@@ -18,25 +45,28 @@ def decode_duration(secs):
     hrs  = secs // 3600;   secs -= hrs  * 3600
     mins = secs // 60
     secs = secs % 60
+    years, months, days2 = days_to_ymd(days)
 
-    return days, hrs, mins, secs
+    return years, months, days2, hrs, mins, secs
 
 def countdown(inaug_epoch):
     delta_secs = int(inaug_epoch - time.time())
     if delta_secs < 0:
-        sign = "-"
+        sign = ""
         delta_secs = -delta_secs
     else:
-        sign = ""
+        sign = "-"
 
-    days, hrs, mins, secs = decode_duration(delta_secs)
+    years, months, days, hrs, mins, secs = decode_duration(delta_secs)
 
-    day_s = "day"    if days == 1 else "days"
-    hr_s  = "hour"   if hrs  == 1 else "hours"
-    min_s = "minute" if mins == 1 else "minutes"
-    sec_s = "second" if secs == 1 else "seconds"
+    year_s  = "year"   if years == 1  else "years"
+    month_s = "month"  if months == 1 else "months"
+    day_s   = "day"    if days == 1   else "days"
+    hr_s    = "hour"   if hrs  == 1   else "hours"
+    min_s   = "minute" if mins == 1   else "minutes"
+    sec_s   = "second" if secs == 1   else "seconds"
 
-    return f'{sign}{days} {day_s}, {hrs} {hr_s}, {mins} {min_s}, and {secs} {sec_s}.'
+    return f'{sign}{years} {year_s}, {months} {month_s}, {days} {day_s}, {hrs} {hr_s}, {mins} {min_s}, and {secs} {sec_s}.'
 
 def swatch():
     return f'@{((int(time.time()) + 3600) % 86400) // 86.4 :03.0f}'
@@ -93,7 +123,7 @@ async def on_message(message):
         m4 = countdown(vaccine_jab2_week)
         m5 = countdown(vaccine_jab3)
         m6 = countdown(vaccine_jab4)
-        msg = f'**First jab:** {m1}\n**14 days after first jab:** {m2}\n**Second jab:** {m3}\n**14 days after second jab:** {m4}\n**Third jab:** {m5}\n**Fourth jab:** {m6}'
+        msg = f'**First jab:** {m1}\n**Second jab:** {m3}\n**First booster:** {m5}\n**Second booster:** {m6}'
         print(f'Message from {message.author}, walt vaccine={msg}')
         await message.channel.send(msg)
     elif content.startswith('covid pa graph'):
