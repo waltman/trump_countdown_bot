@@ -87,6 +87,7 @@ vaccine_jab2_week = int(time.mktime(time.strptime("2021-05-20 13:30", "%Y-%m-%d 
 vaccine_jab3 = int(time.mktime(time.strptime("2021-11-11 13:30", "%Y-%m-%d %H:%M")))
 vaccine_jab4 = int(time.mktime(time.strptime("2022-06-17 10:15", "%Y-%m-%d %H:%M")))
 vaccine_jab5 = int(time.mktime(time.strptime("2022-10-06 13:30", "%Y-%m-%d %H:%M")))
+tdap_jab1 = int(time.mktime(time.strptime("2022-11-29 10:30", "%Y-%m-%d %H:%M")))
 
 class TrumpCountdownClient(discord.Client):
     async def on_ready(self):
@@ -128,7 +129,8 @@ class TrumpCountdownClient(discord.Client):
             m5 = countdown(vaccine_jab3)
             m6 = countdown(vaccine_jab4)
             m7 = countdown(vaccine_jab5)
-            msg = f'**First jab:** {m1}\n**Second jab:** {m3}\n**First booster:** {m5}\n**Second booster:** {m6}\n**Bivalent omicron booster:** {m7}'
+            m8 = countdown(tdap_jab1)
+            msg = f'**First jab:** {m1}\n**Second jab:** {m3}\n**First booster:** {m5}\n**Second booster:** {m6}\n**Bivalent omicron booster:** {m7}\n**Tdap booster:** {m8}'
             print(f'Message from {message.author}, walt vaccine={msg}')
             await message.channel.send(msg)
         elif content.startswith('covid pa graph'):
